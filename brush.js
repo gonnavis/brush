@@ -1266,7 +1266,7 @@ Croquis.Random.LFSR113 = function (seed) {
     this.get();
 };
 
-Croquis.Brush = function () {
+Croquis.Brush = function (callback) {
     // math shortcut
     var min = Math.min;
     var max = Math.max;
@@ -1430,7 +1430,7 @@ Croquis.Brush = function () {
         brushContext.fillRect(0, 0,
             transformedImage.width, transformedImage.height);
     }
-    function drawCircle(size) {
+    function drawCircle(size, x, y) {
         var halfSize = size * 0.5;
         context.fillStyle = color;
         context.globalAlpha = flow;
@@ -1438,6 +1438,7 @@ Croquis.Brush = function () {
         context.arc(halfSize, halfSize, halfSize, 0, ONE);
         context.closePath();
         context.fill();
+        callback(x, y);
     }
     function drawImage(size) {
         if (transformedImageIsDirty)
@@ -1465,7 +1466,7 @@ Croquis.Brush = function () {
         context.translate(x, y);
         context.rotate(ra);
         context.translate(-(width * 0.5), -(height * 0.5));
-        drawFunction(width);
+        drawFunction(width, x, y);
         context.restore();
         appendDirtyRect(x - (boundWidth * 0.5),
                         y - (boundHeight * 0.5),
