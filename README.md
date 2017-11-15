@@ -21,7 +21,7 @@ brush.setColor('rgba(0,0,0,.3)')
 croquis.setTool(brush);
 
 // croquis dom element
-document.body.appendChild(croquis.getDOMElement());
+// document.body.appendChild(croquis.getDOMElement()); // we don't need the canvas any more
 
 // mouse event
 document.addEventListener('mousedown', function (e) {
